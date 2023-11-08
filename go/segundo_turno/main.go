@@ -51,7 +51,7 @@ func main() {
 			log.Fatal(err)
 		}
 
-		time.Sleep(60 * time.Second)
+		time.Sleep(10 * time.Second)
 
 		cmd := exec.Command("clear")
 		cmd.Stdout = os.Stdout
@@ -93,17 +93,18 @@ func Apuracao() error {
 	w := tabwriter.NewWriter(os.Stdout, 1, 1, 5, ' ', tabwriter.AlignRight)
 	fmt.Fprintln(
 		w,
-		"Número\tCandidato\t%\tTotal\t",
+		"Número\tCandidato\t%\tTotal\tEleito\t",
 	)
 	// candidatos
 	for _, candidatos := range result.Candidatos {
 		fmt.Fprintf(
 			w,
-			"%s\t%s\t%s\t%s\t\n",
+			"%s\t%s\t%s\t%s\t%s\t\n",
 			candidatos.Numero,
 			candidatos.Nome,
 			candidatos.VotosApuradosPorcentagem,
 			candidatos.VotosApurados,
+			candidatos.Eleito,
 		)
 	}
 	w.Flush()
